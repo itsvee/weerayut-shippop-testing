@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shippop Test 1</title>
+    <link rel="stylesheet" href="dist/app.css" />
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="form-row mt-5 mb-3">
+            <div class="col-2">
+                <label for="listNumber">List</label>
+            </div>
+            <div class="col-10">
+                <input type="text" id="listNumber" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-row mb-3">
+            <div class="col-2">
+                <label for="typeOfSearch">ประเภทการค้นหา</label>
+            </div>
+            <div class="col-10">
+                <select class="form-control" id="typeOfSearch">
+                    <option value="linear">Linear Search</option>
+                    <option value="binary">Binary Search</option>
+                    <option value="bubble">Bubble Search</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row mb-3">
+            <div class="col-2">
+                <label for="numberToFind">เลขที่ต้องการหา</label>
+            </div>
+            <div class="col-5">
+                <input type="number" id="numberToFind" class="form-control">
+            </div>
+            <div class="col-5">
+                <button type="submit" id="searchBtn" class="btn btn-primary mb-2">ค้นหา</button>
+            </div>
+        </div>
+
+        <div class="form-row mb-3">
+            <div class="col-2">
+                <label for="searchResult">ผลลัพธ์</label>
+            </div>
+            <div class="col-10">
+                <textarea class="form-control" id="searchResult" rows="10" disabled></textarea>
+            </div>
+        </div>
+
+    </div>
+    <script src="dist/app.js"></script>
+</body>
+
+</html>
