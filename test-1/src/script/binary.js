@@ -6,7 +6,7 @@ export function searchByBinary(numArr, numToFind) {
     let html = 'List : [ ' + numArr.toString() + ' ] \n'
     let sortArr = numArr.sort((a, b) => a - b)
     html += 'List sort : [ ' + sortArr.toString() + ' ] \n'
-    html += 'Search : '+ numToFind + '\n'
+    html += 'Search : '+ numToFind + '\n\n'
     html += 'Result ::: \n'
 
     document.getElementById('searchResult').value = html

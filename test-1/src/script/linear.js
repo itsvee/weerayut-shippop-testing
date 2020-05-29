@@ -4,18 +4,18 @@ export function searchByLinear(numArr, numToFind) {
     document.getElementById('searchResult').value = ''
 
     let html = 'List : [ ' + numArr.toString() + ' ] \n'
-    html += 'Search : '+ numToFind + '\n'
+    html += 'Search : '+ numToFind + '\n\n'
     html += 'Result ::: \n'
 
     document.getElementById('searchResult').value = html
     for (let i = 0; i < numArr.length; i++) {
 
         if (numArr[i] === numToFind) {
-            let output = 'Round : ' + i + ' ===> ' + numToFind + ' = ' + numArr[i] + ' found !!'
+            let output = 'Round : ' + (i+1) + ' ===> ' + numToFind + ' = ' + numArr[i] + ' found !!'
             document.getElementById('searchResult').value += output
             return false
         } else {
-            let output = 'Round : ' + i + ' ===> ' + numToFind + ' != ' + numArr[i] + '\n'
+            let output = 'Round : ' + (i+1) + ' ===> ' + numToFind + ' != ' + numArr[i] + '\n'
             document.getElementById('searchResult').value += output
         }
 
@@ -25,10 +25,4 @@ export function searchByLinear(numArr, numToFind) {
         }
     }
 
-}
-
-function setDelay(i) {
-    setTimeout(function(){
-        console.log(i);
-    }, 1000);
 }
