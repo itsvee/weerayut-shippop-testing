@@ -13,13 +13,13 @@ document.querySelector('#searchBtn').addEventListener('click', (e) => {
         if (numberToFind.value.length !== 0 ) {
             switch (typeToFind.value) {
                 case 'linear':
-                    searchByLinear(list_arr, numberToFind.value)
+                    searchByLinear(list_arr, parseInt(numberToFind.value))
                     break;
                 case 'binary':
-                    searchByBinary(list_arr, numberToFind.value)
+                    searchByBinary(list_arr, parseInt(numberToFind.value))
                     break;
                 case 'bubble':
-                    searchByBubble(list_arr, numberToFind.value)
+                    searchByBubble(list_arr, parseInt(numberToFind.value))
                     break;
             }
         } else {
@@ -33,7 +33,7 @@ document.querySelector('#searchBtn').addEventListener('click', (e) => {
 
 function convertToArray(ele) {
     if (ele.value.length !== 0) {
-        return ele.value.split(',');
+        return ele.value.split(',').map(Number)
     } else {
         return false
     }

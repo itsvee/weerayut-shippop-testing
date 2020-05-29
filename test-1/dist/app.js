@@ -111,14 +111,15 @@ document.querySelector('#searchBtn').addEventListener('click', function (e) {
     if (numberToFind.value.length !== 0) {
       switch (typeToFind.value) {
         case 'linear':
-          Object(_script_linear__WEBPACK_IMPORTED_MODULE_0__["searchByLinear"])(list_arr, numberToFind.value);
+          Object(_script_linear__WEBPACK_IMPORTED_MODULE_0__["searchByLinear"])(list_arr, parseInt(numberToFind.value));
           break;
 
         case 'binary':
-          Object(_script_binary__WEBPACK_IMPORTED_MODULE_1__["searchByBinary"])(list_arr, numberToFind.value);
+          Object(_script_binary__WEBPACK_IMPORTED_MODULE_1__["searchByBinary"])(list_arr, parseInt(numberToFind.value));
           break;
 
         case 'bubble':
+          Object(_script_bubble__WEBPACK_IMPORTED_MODULE_2__["searchByBubble"])(list_arr, parseInt(numberToFind.value));
           break;
       }
     } else {
@@ -131,7 +132,7 @@ document.querySelector('#searchBtn').addEventListener('click', function (e) {
 
 function convertToArray(ele) {
   if (ele.value.length !== 0) {
-    return ele.value.split(',');
+    return ele.value.split(',').map(Number);
   } else {
     return false;
   }
@@ -172,23 +173,37 @@ function searchByBinary(numArr, numToFind) {
   html += 'Result ::: \n';
   document.getElementById('searchResult').value = html;
   var min = 0;
-  var max = sortArr.length - 1; // let round = 1;
+  var max = sortArr.length - 1;
+  var mid = 0;
+  var round = 1;
 
-  var mid = Math.floor((min + max) / 2);
+  while (min <= max) {
+    mid = Math.floor((min + max) / 2);
 
-  while (sortArr[mid] !== numToFind && min < max) {
-    if (numToFind < sortArr[mid]) {
-      max = mid - 1;
-    } else if (numToFind > sortArr[mid]) {
+    if (sortArr[mid] === numToFind) {
+      var _output = 'Round : ' + round + ' ===> ' + numToFind + ' == ' + sortArr[mid] + '  ( Min: ' + sortArr[min] + ' | Mid: ' + sortArr[mid] + ' | Max: ' + sortArr[max] + ' )\n';
+
+      _output += 'Found your number!!';
+      document.getElementById('searchResult').value += _output;
+      return numToFind;
+    } else if (sortArr[mid] < numToFind) {
+      var _output2 = 'Round : ' + round + ' ===> ' + numToFind + ' > ' + sortArr[mid] + '  ( Min: ' + sortArr[min] + ' | Mid: ' + sortArr[mid] + ' | Max: ' + sortArr[max] + ' )\n';
+
+      document.getElementById('searchResult').value += _output2;
       min = mid + 1;
+    } else {
+      var _output3 = 'Round : ' + round + ' ===> ' + numToFind + ' < ' + sortArr[mid] + '  ( Min: ' + sortArr[min] + ' | Mid: ' + sortArr[mid] + ' | Max: ' + sortArr[max] + ' )\n';
+
+      document.getElementById('searchResult').value += _output3;
+      max = mid - 1;
     }
 
-    mid = Math.floor((max + min) / 2);
-  } //make sure it's the right value
+    round++;
+  }
 
-
-  var result = sortArr[mid] !== numToFind ? -1 : mid;
-  console.log(result);
+  var output = 'Not found your number !!';
+  document.getElementById('searchResult').value += output;
+  return false;
 }
 
 /***/ }),
@@ -197,32 +212,23 @@ function searchByBinary(numArr, numToFind) {
 /*!******************************!*\
   !*** ./src/script/bubble.js ***!
   \******************************/
-/*! exports provided: default */
+/*! exports provided: searchByBubble */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Bubble; });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Bubble = /*#__PURE__*/function () {
-  function Bubble() {
-    _classCallCheck(this, Bubble);
-  }
-
-  _createClass(Bubble, [{
-    key: "searchByBubble",
-    value: function searchByBubble() {}
-  }]);
-
-  return Bubble;
-}();
-
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchByBubble", function() { return searchByBubble; });
+function searchByBubble(numArr, numToFind) {
+  // Clear result textarea
+  document.getElementById('searchResult').value = '';
+  var html = 'List : [ ' + numArr.toString() + ' ] \n';
+  var sortArr = numArr.sort(function (a, b) {
+    return a - b;
+  });
+  html += 'Search : ' + numToFind + '\n';
+  html += 'Result ::: \n';
+  document.getElementById('searchResult').value = html;
+}
 
 /***/ }),
 

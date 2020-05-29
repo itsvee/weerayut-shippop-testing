@@ -11,24 +11,33 @@ export function searchByBinary(numArr, numToFind) {
 
     document.getElementById('searchResult').value = html
 
-    let min = 0;
-    let max = sortArr.length - 1;
-    // let round = 1;
-    let mid = Math.floor((min + max) /2);
+    let min = 0
+    let max = sortArr.length - 1
+    let mid = 0;
+    let round = 1;
 
-    while(sortArr[mid] !== numToFind && min < max){
+    while (min <= max) {
+        mid = Math.floor((min + max) / 2)
 
-        if (numToFind < sortArr[mid]) {
-            max = mid - 1;
-        } else if (numToFind > sortArr[mid]) {
-            min = mid + 1;
+        if (sortArr[mid] === numToFind) {
+            let output = 'Round : ' + round + ' ===> ' +  numToFind + ' == ' + sortArr[mid] + '  ( Min: ' + sortArr[min] + ' | Mid: ' + sortArr[mid] + ' | Max: ' + sortArr[max] + ' )\n'
+            output += 'Found your number!!'
+            document.getElementById('searchResult').value += output
+            return numToFind
+        } else if (sortArr[mid] < numToFind) {
+            let output = 'Round : ' + round + ' ===> ' +  numToFind + ' > ' + sortArr[mid] + '  ( Min: ' + sortArr[min] + ' | Mid: ' + sortArr[mid] + ' | Max: ' + sortArr[max] + ' )\n'
+            document.getElementById('searchResult').value += output
+            min = mid + 1
+        } else {
+            let output = 'Round : ' + round + ' ===> ' +  numToFind + ' < ' + sortArr[mid] + '  ( Min: ' + sortArr[min] + ' | Mid: ' + sortArr[mid] + ' | Max: ' + sortArr[max] + ' )\n'
+            document.getElementById('searchResult').value += output
+            max = mid - 1
         }
 
-        mid = Math.floor((max + min)/2);
+        round++
     }
 
-    //make sure it's the right value
-    let result = (sortArr[mid] !== numToFind) ? -1 : mid;
-    console.log(result)
-
+    let output = 'Not found your number !!'
+    document.getElementById('searchResult').value += output
+    return false
 }
